@@ -22,7 +22,7 @@ The training data should be formatted as follows. Each row is a new training exa
 
 ## Future Improvements
 
-I created this network after completing the Machine Learning course offered through Coursera and Stanford Online that is taught by Andrew Ng. My objective was to gain further insight in the process of creating and optimizing a neural network. I have therefore identified key areas where this network can be improved.
+I created this network after completing the Machine Learning course offered through Coursera and Stanford Online that is taught by Andrew Ng. My objective was to gain further insight in the process of creating and optimizing a neural network. I have therefore identified key areas where I plan to improve this network in the future.
 * Use another activation function instead of the sigmoid function for the intermediate layers of the network (perhaps tanh, ReLU or softmax).
 * Implement a more sophisticated regularization for the cost and gradient (L1 and L2 regularization).
 * Add mini-batch and stochastic gradient descent options.
