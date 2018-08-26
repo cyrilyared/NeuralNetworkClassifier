@@ -17,7 +17,7 @@ After training with the training data, the test data is passed through forward p
 
 ## Training Data Format
 
-The training data should be formatted as follows. Each row is a new training example with comma-delimited data (I would recommend using a CSV file). The first `n - 1` numbers (where `'n` is the number of columns) represent the features (X<sup>(i)</sup>). The last number represents the classification for that training example (y<sup>(i)</sup>).
+The training data should be formatted as follows. Each row is a new training example with comma-delimited data (I would recommend using a CSV file). The first `n - 1` numbers (where `n` is the number of columns) represent the features (X<sup>(i)</sup>). The last number represents the classification for that training example (y<sup>(i)</sup>).
 
 
 ## Future Improvements
