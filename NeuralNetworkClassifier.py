@@ -98,6 +98,18 @@ def loadWeights():
     weight2 = getData("weight2", float)
     return weight1, weight2
 
+def saveMinMaxMeanTrim(min, max, mean, trimIndex):
+    trimIndex = np.asarray(trimIndex)
+    saveArray = np.vstack((min, max, mean, np.hstack((trimIndex, np.zeros(mean.size-trimIndex.size))), np.hstack((trimIndex.size, np.zeros(mean.size-1)))))
+    np.savetxt(raw_input("Enter the filename for the document that will contain the min, mean, max and trim index: "), saveArray, delimiter = ',')
+
+def loadMinMaxMeanTrim():
+    array = getData("min, mean, max and trim index", float)
+    min, max, mean = array[0,:], array[1,:], array[2,:]
+    trimIndexSize = array[4,0]
+    trimIndex = array[3,0:trimIndexSize.astype(int)]
+    return min, max, mean, trimIndex.tolist()
+
 def checkDimensions(array):
     if array.ndim == 1:
         array = array[np.newaxis]
@@ -114,11 +126,14 @@ def trimFeatures(min, max, mean, X):
     for i in range(min.shape[0]):
         if (max[i]-min[i]) == 0:
             trimIndex.append(i)
-    X = np.delete(X, trimIndex, axis=1)
-    min = np.delete(min, trimIndex)
-    max = np.delete(max, trimIndex)
-    mean = np.delete(mean, trimIndex)
+    X = trim(X, trimIndex, axis=1)
+    min = trim(min, trimIndex)
+    max = trim(max, trimIndex)
+    mean = trim(mean, trimIndex)
     return min, max, mean, X, trimIndex
+
+def trim(array, trimIndex, axis=None):
+    return np.delete(array, trimIndex, axis)
 
 def normalizeData(min, max, mean, X):
     X = X.astype(float)
@@ -153,6 +168,6 @@ if __name__ == "__main__":
     testingData = getData("testing", float)
     testingData = checkDimensions(testingData)
     Xtest, ytest = testingData[:, :-1], testingData[:, -1].astype(int)
-    Xtest = normalizeData(min, max, mean, np.delete(Xtest, trimIndex, axis=1))
+    Xtest = normalizeData(min, max, mean, trim(Xtest, trimIndex, axis=1))
     print("Testing Accuracy: %.2f%%" % (NN.accuracy(Xtest, ytest)*100))
 

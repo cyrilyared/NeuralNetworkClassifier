@@ -24,6 +24,8 @@ The training data should be formatted as follows. Each row is a new training exa
 
 Weights can be saved after training the neural network and loaded to use the neural network to make predictions. To save the weights, call `NN.saveWeights()` after training the network. To load the weights into the network, set `weights = loadWeights()` in the parameters section. It will then ask for two separate files containing the weights between the input and hidden layer and the weights between the hidden and output layer. This file should be in a comma-delimited format. I would comment the line `NN.train(Xtrain, ytrain)` if you do not want to further train the weights.
 
+When saving the weights, I would also advise saving the data needed for normalizing and trimming the features so that the same normalization and trimming is applied to any future datasets. The `saveMinMaxMeanTrim()` can be called to save this data into a file. This file can then be loaded with `loadMinMaxMeanTrim()` which returns the NumPy arrays `min`, `max`, `mean` and the `trimIndex` list.
+
 
 ## Future Improvements
 
